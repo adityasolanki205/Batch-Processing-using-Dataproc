@@ -5,6 +5,7 @@ This is one of the part of **Introduction to Dataproc using PySpark** Repository
 2. **Creating a Dataproc Job**
 3. **Reading from a File in Google Cloud Storage**
 4. **Printing few records**
+5  **Storing the Records in Bigquery**
 
 
 ## Motivation
@@ -38,7 +39,7 @@ Below are the steps to setup the enviroment and run the codes:
 
 ```bash
     # clone this repo:
-    git clone https://github.com/adityasolanki205/Read-file-from-GCS-using-Dataproc.git
+    git clone https://github.com/adityasolanki205/Batch-Processing-using-Dataproc.git
 ```
 
 3. **Creating a Dataproc cluster**: Now we create a dataproc cluster to run Pyspark Jobs. The simple command to create a basic cluster is given below.
@@ -50,12 +51,11 @@ Below are the steps to setup the enviroment and run the codes:
    --single-node 
 ``` 
 
-4. **Creating a PySpark Job to read Google Cloud Storage and printing the data**: After reading the input file we will use a small code. Here we will use SparkSession to create a dataframe by reading from a GCS bucket. Here we will read from the bucket and print the details
+4. **Creating a PySpark Job to read Google Cloud Storage and printing the data**: After reading the input file we will use a small code. Here we will use SparkSession to create a dataframe by reading from a GCS bucket. Here we will read from the bucket, create a temporary view and print the details of the dataframe
 
 ```python
     import pyspark
     from pyspark.sql import SparkSession
-    from google.cloud import storage
 
     appName = "DataProc testing"
     master = "local"
@@ -64,13 +64,36 @@ Below are the steps to setup the enviroment and run the codes:
             master(master).\
             getOrCreate()     
 
-    df = spark.read.csv("gs://dataproc-testing-pyspark/titanic.csv",header=True, inferSchema=True)
-    print(df.show())
+    bucket = "dataproc-testing-pyspark"
+    spark.conf.set('temporaryGcsBucket', bucket)
+    df = spark.read.option( "inferSchema" , "true" ).option("header","true").\
+        csv("gs://dataproc-testing-pyspark/titanic.csv")
+    
+    df.createOrReplaceTempView('Titanic')
+
+    complete_data = spark.sql('Select * from Titanic')
+    complete_data.show()
+
+``` 
+5. **Saving the data in Bigquery**: At last we will save the data in the Bigquery table using the below command
+```python
+    import pyspark
+    from pyspark.sql import SparkSession
+
+    appName = "DataProc testing"
+    master = "local"
+    spark = SparkSession.builder.\
+            appName(appName).\
+            master(master).\
+            getOrCreate()     
+
+    ...
+    complete_data.write.format('com.google.cloud.spark.bigquery').\
+        option('table', 'titanic.titanic_data').mode('append').save()
+
 ``` 
 
-The output will be available inside one of the buckets and is attached here by the name job_output.txt. The Output of the jobs will also be visible on the sdk like this
-
-![](data/output.JPG)
+The output will be available inside one of the buckets and is attached here by the name job_output.txt. 
 
 
 ## Tests
@@ -92,7 +115,9 @@ To test the code we need to do the following:
         CLUSTER=testing-dataproc
         REGION=us-central1
         
-    5. Create a Biquery dataset with the name Titanic, a table in this dataset by the name titanic_data with the schema
+    5. Create a Biquery dataset with the name Titanic, a table in this dataset by the name 
+       titanic_data with the schema
+        
         PassengerId:INTEGER,
         Survived:INTEGER,
         Pclass:INTEGER,
@@ -116,7 +141,6 @@ To test the code we need to do the following:
         gcloud dataproc jobs submit pyspark bq_write.py \
         --cluster=${CLUSTER} \
         --region=${REGION} \
-        -- gs://${BUCKET_NAME}/ gs://${BUCKET_NAME}/output/ \
         --jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar
 
 
