@@ -5,7 +5,7 @@ This is one of the part of **Introduction to Dataproc using PySpark** Repository
 2. **Creating a Dataproc Job**
 3. **Reading from a File in Google Cloud Storage**
 4. **Printing few records**
-5  **Storing the Records in Bigquery**
+5.  **Storing the Records in Bigquery**
 
 
 ## Motivation
