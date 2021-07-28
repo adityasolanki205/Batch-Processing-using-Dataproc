@@ -1,4 +1,4 @@
-# Read file from GCS using Dataproc
+# Batch Processing using Dataproc
 This is one of the part of **Introduction to Dataproc using PySpark** Repository. Here we will try to learn basics of Apache Spark to create **Batch** jobs. Here We will learn step by step how to create a batch job using [Titanic Dataset](https://www.kaggle.com/c/titanic). The complete process is divided into 4 parts:
 
 1. **Creating a Dataproc Cluster**
@@ -19,12 +19,13 @@ For the last two years, I have been part of a great learning curve wherein I hav
 - [Python](https://www.python.org/)
 - [Google Dataproc](https://cloud.google.com/dataproc)
 - [Google Cloud Storage](https://cloud.google.com/storage)
+- [Google Bigquery](https://cloud.google.com/bigquery)
 
 ## Cloning Repository
 
 ```bash
     # clone this repo:
-    git clone https://github.com/adityasolanki205/Read-file-from-GCS-using-Dataproc.git
+    git clone https://github.com/adityasolanki205/Batch-Processing-using-Dataproc.git
 ```
 
 ## Job Construction
