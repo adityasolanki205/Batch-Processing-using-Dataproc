@@ -85,24 +85,39 @@ To test the code we need to do the following:
         cd Read-file-from-GCS-using-Dataproc/data
         gsutil cp titanic.csv gs://dataproc-testing-pyspark/
         cd ..
-    
+
     4. Create Temporary variables to hold GCP values
         PROJECT=<project name>
         BUCKET_NAME=dataproc-testing-pyspark
         CLUSTER=testing-dataproc
         REGION=us-central1
+        
+    5. Create a Biquery dataset with the name Titanic, a table in this dataset by the name titanic_data with the schema
+        PassengerId:INTEGER,
+        Survived:INTEGER,
+        Pclass:INTEGER,
+        Name:STRING,
+        Sex:STRING,
+        Age:FLOAT,
+        SibSp:INTEGER,
+        Parch:INTEGER,
+        Ticket:STRING,
+        Fare:FLOAT,
+        Cabin:STRING,
+        Embarked:STRING
     
-    5. Create a Dataproc cluster by using the command:
+    6. Create a Dataproc cluster by using the command:
         gcloud dataproc clusters create ${CLUSTER} \
         --project=${PROJECT} \
         --region=${REGION} \
         --single-node 
     
     7. Create a PySpark Job to run the code:
-        gcloud dataproc jobs submit pyspark gcs_read.py \
+        gcloud dataproc jobs submit pyspark bq_write.py \
         --cluster=${CLUSTER} \
         --region=${REGION} \
-        -- gs://${BUCKET_NAME}/ gs://${BUCKET_NAME}/output/
+        -- gs://${BUCKET_NAME}/ gs://${BUCKET_NAME}/output/ \
+        --jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar
 
 
 ## Credits
