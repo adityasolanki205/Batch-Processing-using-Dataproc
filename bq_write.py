@@ -8,12 +8,12 @@ spark = SparkSession.builder.\
         master(master).\
         getOrCreate()     
 
-bucket = "gs://dataproc-testing-pyspark"
+bucket = "dataproc-testing-pyspark"
 spark.conf.set('temporaryGcsBucket', bucket)
 df = spark.read.option( "inferSchema" , "true" ).option("header","true").csv("gs://dataproc-testing-pyspark/titanic.csv")
 df.createOrReplaceTempView('Titanic')
 
 complete_data = spark.sql('Select * from Titanic')
 complete_data.show()
-complete_data.write.format('com.google.cloud.spark.bigquery').option('table', 'titanic.titanic_data').save()
+complete_data.write.format('com.google.cloud.spark.bigquery').option('table', 'titanic.titanic_data').mode('append').save()
 
