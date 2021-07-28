@@ -8,9 +8,9 @@ spark = SparkSession.builder.\
         master(master).\
         getOrCreate()     
 
-bucket = "gs://dataproc-testing"
+bucket = "gs://dataproc-testing-pyspark"
 spark.conf.set('temporaryGcsBucket', bucket)
-df = spark.read.option( "inferSchema" , "true" ).option("header","true").csv("gs://dataproc-testing/titanic.csv")
+df = spark.read.option( "inferSchema" , "true" ).option("header","true").csv("gs://dataproc-testing-pyspark/titanic.csv")
 df.createOrReplaceTempView('Titanic')
 
 complete_data = sparl.sql('Select * from Titanic')
