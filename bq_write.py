@@ -15,6 +15,5 @@ df.createOrReplaceTempView('Titanic')
 
 complete_data = spark.sql('Select * from Titanic')
 complete_data.show()
-complete_data.printschema()
 complete_data.write.format('com.google.cloud.spark.bigquery').option('table', 'titanic.titanic_data').save()
 
