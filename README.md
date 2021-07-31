@@ -51,7 +51,7 @@ Below are the steps to setup the enviroment and run the codes:
    --single-node 
 ``` 
 
-4. **Creating a PySpark Job to read Google Cloud Storage and printing the data**: After reading the input file we will use a small code. Here we will use SparkSession to create a dataframe by reading from a GCS bucket. Here we will read from the bucket, create a temporary view and print the details of the dataframe
+4. **Creating a PySpark Job to read Google Cloud Storage and printing the data**: To perform this activity we will use a small pyspark code. Here we will use SparkSession to create a dataframe by reading from a GCS bucket. Here we will read from the bucket, create a temporary view and print the details of the dataframe
 
 ```python
     import pyspark
@@ -75,7 +75,9 @@ Below are the steps to setup the enviroment and run the codes:
     complete_data.show()
 
 ``` 
+
 5. **Saving the data in Bigquery**: At last we will save the data in the Bigquery table using the below command
+
 ```python
     import pyspark
     from pyspark.sql import SparkSession
