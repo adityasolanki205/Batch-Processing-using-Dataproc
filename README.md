@@ -1,5 +1,5 @@
 # Batch Processing using Dataproc
-This is one of the part of **Introduction to Dataproc using PySpark** Repository. Here we will try to learn basics of Apache Spark to create **Batch** jobs. Here We will learn step by step how to create a batch job using [Titanic Dataset](https://www.kaggle.com/c/titanic). The complete process is divided into 4 parts:
+This is one of the part of **Introduction to Dataproc using PySpark** Repository. Here we will try to learn basics of Apache Spark to create **Batch** jobs. Here We will learn step by step how to create a batch job using [Titanic Dataset](https://www.kaggle.com/c/titanic). The complete process is divided into 5 parts:
 
 1. **Creating a Dataproc Cluster**
 2. **Creating a Dataproc Job**
