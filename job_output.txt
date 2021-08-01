@@ -1,55 +1,30 @@
-21/07/28 16:04:45 INFO org.sparkproject.jetty.util.log: Logging initialized @3647ms to org.sparkproject.jetty.util.log.Slf4jLog
-21/07/28 16:04:45 INFO org.sparkproject.jetty.server.Server: jetty-9.4.40.v20210413; built: 2021-04-13T20:42:42.668Z; git: b881a572662e1943a14ae12e7e1207989f218b74; jvm 1.8.0_292-b10
-21/07/28 16:04:45 INFO org.sparkproject.jetty.server.Server: Started @3830ms
-21/07/28 16:04:45 INFO org.sparkproject.jetty.server.AbstractConnector: Started ServerConnector@7008c4b9{HTTP/1.1, (http/1.1)}{0.0.0.0:37227}
-21/07/28 16:04:47 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageImpl: Ignoring exception of type GoogleJsonResponseException; verified object already exists with desired state.
-+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+
-|PassengerId|Survived|Pclass|                Name|   Sex| Age|SibSp|Parch|          Ticket|   Fare|Cabin|Embarked|
-+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+
-|          1|       0|     3|Braund, Mr. Owen ...|  male|22.0|    1|    0|       A/5 21171|   7.25| null|       S|
-|          2|       1|     1|Cumings, Mrs. Joh...|female|38.0|    1|    0|        PC 17599|71.2833|  C85|       C|
-|          3|       1|     3|Heikkinen, Miss. ...|female|26.0|    0|    0|STON/O2. 3101282|  7.925| null|       S|
-|          4|       1|     1|Futrelle, Mrs. Ja...|female|35.0|    1|    0|          113803|   53.1| C123|       S|
-|          5|       0|     3|Allen, Mr. Willia...|  male|35.0|    0|    0|          373450|   8.05| null|       S|
-|          6|       0|     3|    Moran, Mr. James|  male|null|    0|    0|          330877| 8.4583| null|       Q|
-|          7|       0|     1|McCarthy, Mr. Tim...|  male|54.0|    0|    0|           17463|51.8625|  E46|       S|
-|          8|       0|     3|Palsson, Master. ...|  male| 2.0|    3|    1|          349909| 21.075| null|       S|
-|          9|       1|     3|Johnson, Mrs. Osc...|female|27.0|    0|    2|          347742|11.1333| null|       S|
-|         10|       1|     2|Nasser, Mrs. Nich...|female|14.0|    1|    0|          237736|30.0708| null|       C|
-|         11|       1|     3|Sandstrom, Miss. ...|female| 4.0|    1|    1|         PP 9549|   16.7|   G6|       S|
-|         12|       1|     1|Bonnell, Miss. El...|female|58.0|    0|    0|          113783|  26.55| C103|       S|
-|         13|       0|     3|Saundercock, Mr. ...|  male|20.0|    0|    0|       A/5. 2151|   8.05| null|       S|
-|         14|       0|     3|Andersson, Mr. An...|  male|39.0|    1|    5|          347082| 31.275| null|       S|
-|         15|       0|     3|Vestrom, Miss. Hu...|female|14.0|    0|    0|          350406| 7.8542| null|       S|
-|         16|       1|     2|Hewlett, Mrs. (Ma...|female|55.0|    0|    0|          248706|   16.0| null|       S|
-|         17|       0|     3|Rice, Master. Eugene|  male| 2.0|    4|    1|          382652| 29.125| null|       Q|
-|         18|       1|     2|Williams, Mr. Cha...|  male|null|    0|    0|          244373|   13.0| null|       S|
-|         19|       0|     3|Vander Planke, Mr...|female|31.0|    1|    0|          345763|   18.0| null|       S|
-|         20|       1|     3|Masselmani, Mrs. ...|female|null|    0|    0|            2649|  7.225| null|       C|
-+-----------+--------+------+--------------------+------+----+-----+-----+----------------+-------+-----+--------+
-only showing top 20 rows
-
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.codec.CodecConfig: Compression: SNAPPY
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.codec.CodecConfig: Compression: SNAPPY
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet block size to 134217728
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet page size to 1048576
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet dictionary page size to 1048576
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Dictionary is on
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Validation is off
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Writer version is: PARQUET_1_0
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Maximum row group padding size is 8388608 bytes
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Page size checking is: estimated
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Min row count for page size check is: 100
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Max row count for page size check is: 10000
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Truncate length for column indexes is: 64
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Truncate length for statistics min/max  is: 2147483647
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Page row count limit to 20000
-21/07/28 16:04:57 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Writing page checksums is: on
-21/07/28 16:04:57 INFO org.apache.hadoop.io.compress.CodecPool: Got brand-new compressor [.snappy]
-21/07/28 16:04:59 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627488285865-3500530f-821e-4962-b8df-9184b0265aa3/_temporary/0/_temporary/' directory.
-21/07/28 16:05:00 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627488285865-3500530f-821e-4962-b8df-9184b0265aa3/_temporary/0/task_202107281604575536094660695888036_0003_m_000000/' directory.
-21/07/28 16:05:00 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627488285865-3500530f-821e-4962-b8df-9184b0265aa3/' directory.
-21/07/28 16:05:01 INFO com.google.cloud.spark.bigquery.repackaged.com.google.cloud.bigquery.connector.common.BigQueryClient: Submitted job LoadJobConfiguration{type=LOAD, destinationTable=GenericData{classInfo=[datasetId, projectId, tableId], {datasetId=titanic, projectId=silver-argon-320416, tableId=titanic_data}}, destinationEncryptionConfiguration=null, createDisposition=CREATE_IF_NEEDED, writeDisposition=WRITE_APPEND, formatOptions=FormatOptions{format=PARQUET}, nullMarker=null, maxBadRecords=null, schema=null, ignoreUnknownValue=null, sourceUris=[gs://dataproc-testing-pyspark/.spark-bigquery-local-1627488285865-3500530f-821e-4962-b8df-9184b0265aa3/part-00000-97080e70-bf6d-4061-8b61-f59d896d7a73-c000.snappy.parquet], schemaUpdateOptions=null, autodetect=true, timePartitioning=null, clustering=null, useAvroLogicalTypes=null, labels=null, jobTimeoutMs=null, rangePartitioning=null, hivePartitioningOptions=null}. jobId: JobId{project=silver-argon-320416, job=a95e99ae-020b-4b17-a260-da8d88cb7ffd, location=US}
-21/07/28 16:05:03 INFO com.google.cloud.spark.bigquery.BigQueryWriteHelper: Submitted load to GenericData{classInfo=[datasetId, projectId, tableId], {datasetId=titanic, projectId=silver-argon-320416, tableId=titanic_data}}. jobId: JobId{project=silver-argon-320416, job=a95e99ae-020b-4b17-a260-da8d88cb7ffd, location=US}
-21/07/28 16:05:03 INFO com.google.cloud.spark.bigquery.BigQueryWriteHelper: Done loading to silver-argon-320416.titanic.titanic_data. jobId: JobId{project=silver-argon-320416, job=a95e99ae-020b-4b17-a260-da8d88cb7ffd, location=US}
-21/07/28 16:05:04 INFO org.sparkproject.jetty.server.AbstractConnector: Stopped Spark@7008c4b9{HTTP/1.1, (http/1.1)}{0.0.0.0:0}
+21/08/01 06:47:57 INFO org.sparkproject.jetty.util.log: Logging initialized @3743ms to org.sparkproject.jetty.util.log.Slf4jLog
+21/08/01 06:47:57 INFO org.sparkproject.jetty.server.Server: jetty-9.4.40.v20210413; built: 2021-04-13T20:42:42.668Z; git: b881a572662e1943a14ae12e7e1207989f218b74; jvm 1.8.0_292-b10
+21/08/01 06:47:57 INFO org.sparkproject.jetty.server.Server: Started @3875ms
+21/08/01 06:47:58 INFO org.sparkproject.jetty.server.AbstractConnector: Started ServerConnector@67a69983{HTTP/1.1, (http/1.1)}{0.0.0.0:44685}
+21/08/01 06:47:59 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageImpl: Ignoring exception of type GoogleJsonResponseException; verified object already exists with desired state.
+21/08/01 06:48:07 WARN org.apache.spark.sql.catalyst.util.package: Truncated the string representation of a plan since it was too large. This behavior can be adjusted by setting 'spark.sql.debug.maxToStringFields'.
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.codec.CodecConfig: Compression: SNAPPY
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.codec.CodecConfig: Compression: SNAPPY
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet block size to 134217728
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet page size to 1048576
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Parquet dictionary page size to 1048576
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Dictionary is on
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Validation is off
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Writer version is: PARQUET_1_0
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Maximum row group padding size is 8388608 bytes
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Page size checking is: estimated
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Min row count for page size check is: 100
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Max row count for page size check is: 10000
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Truncate length for column indexes is: 64
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Truncate length for statistics min/max  is: 2147483647
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Page row count limit to 20000
+21/08/01 06:48:09 INFO org.apache.parquet.hadoop.ParquetOutputFormat: Writing page checksums is: on
+21/08/01 06:48:10 INFO org.apache.hadoop.io.compress.CodecPool: Got brand-new compressor [.snappy]
+21/08/01 06:48:12 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627800478219-ec5e1991-d6e8-4d13-aafc-8356850029d6/_temporary/0/_temporary/attempt_202108010648096007144894293105705_0002_m_000000_2/' directory.
+21/08/01 06:48:12 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627800478219-ec5e1991-d6e8-4d13-aafc-8356850029d6/_temporary/0/_temporary/' directory.
+21/08/01 06:48:12 INFO com.google.cloud.hadoop.repackaged.gcs.com.google.cloud.hadoop.gcsio.GoogleCloudStorageFileSystem: Successfully repaired 'gs://dataproc-testing-pyspark/.spark-bigquery-local-1627800478219-ec5e1991-d6e8-4d13-aafc-8356850029d6/' directory.
+21/08/01 06:48:13 INFO com.google.cloud.spark.bigquery.repackaged.com.google.cloud.bigquery.connector.common.BigQueryClient: Submitted job LoadJobConfiguration{type=LOAD, destinationTable=GenericData{classInfo=[datasetId, projectId, tableId], {datasetId=GermanCredit, projectId=silver-argon-320416, tableId=German_Credit_final}}, destinationEncryptionConfiguration=null, createDisposition=CREATE_IF_NEEDED, writeDisposition=WRITE_APPEND, formatOptions=FormatOptions{format=PARQUET}, nullMarker=null, maxBadRecords=null, schema=null, ignoreUnknownValue=null, sourceUris=[gs://dataproc-testing-pyspark/.spark-bigquery-local-1627800478219-ec5e1991-d6e8-4d13-aafc-8356850029d6/part-00000-54d2ffcd-803d-468a-aa37-7f01fb76bec8-c000.snappy.parquet], schemaUpdateOptions=null, autodetect=true, timePartitioning=null, clustering=null, useAvroLogicalTypes=null, labels=null, jobTimeoutMs=null, rangePartitioning=null, hivePartitioningOptions=null}. jobId: JobId{project=silver-argon-320416, job=884a7665-33e3-466e-8518-6080591b9d4b, location=US}
+21/08/01 06:48:15 INFO com.google.cloud.spark.bigquery.BigQueryWriteHelper: Submitted load to GenericData{classInfo=[datasetId, projectId, tableId], {datasetId=GermanCredit, projectId=silver-argon-320416, tableId=German_Credit_final}}. jobId: JobId{project=silver-argon-320416, job=884a7665-33e3-466e-8518-6080591b9d4b, location=US}
+21/08/01 06:48:15 INFO com.google.cloud.spark.bigquery.BigQueryWriteHelper: Done loading to silver-argon-320416.GermanCredit.German_Credit_final. jobId: JobId{project=silver-argon-320416, job=884a7665-33e3-466e-8518-6080591b9d4b, location=US}
+21/08/01 06:48:16 INFO org.sparkproject.jetty.server.AbstractConnector: Stopped Spark@67a69983{HTTP/1.1, (http/1.1)}{0.0.0.0:0}
