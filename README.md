@@ -102,7 +102,7 @@ The output will be available inside one of the buckets and is attached here by t
 To test the code we need to do the following:
 
     1. Copy the repository in Cloud SDK using below command:
-        git clone https://github.com/adityasolanki205/Read-file-from-GCS-using-Dataproc.git
+        git clone https://github.com/adityasolanki205/Batch-Processing-using-Dataproc.git
     
     2. Create a US Multiregional Storage Bucket by the name dataproc-testing-pyspark.
     
