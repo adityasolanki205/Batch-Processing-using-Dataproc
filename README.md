@@ -1,10 +1,10 @@
 # Batch Processing using Dataproc
-This is one of the part of **Introduction to Dataproc using PySpark** Repository. Here we will try to learn basics of Apache Spark to create **Batch** jobs. Here We will learn step by step how to create a batch job using [Titanic Dataset](https://www.kaggle.com/c/titanic). The complete process is divided into 5 parts:
+This is one of the part of **Introduction to Dataproc using PySpark** Repository. Here we will try to learn basics of Apache Spark to create **Batch** jobs. Here We will learn step by step how to create a batch job using [German Credit Risk](https://www.kaggle.com/uciml/german-credit). The complete process is divided into 5 parts:
 
 1. **Creating a Dataproc Cluster**
 2. **Creating a Dataproc Job**
 3. **Reading from a File in Google Cloud Storage**
-4. **Printing few records**
+4. **Performing certain Transforms**
 5. **Storing the Records in Bigquery**
 
 
@@ -51,7 +51,7 @@ Below are the steps to setup the enviroment and run the codes:
    --single-node 
 ``` 
 
-4. **Creating a PySpark Job to read Google Cloud Storage and printing the data**: To perform this activity we will use a small pyspark code. Here we will use SparkSession to create a dataframe by reading from a GCS bucket. Here we will read from the bucket, create a temporary view and print the details of the dataframe
+4. **Reading data from Google Cloud Storage**: To read the data we will use pyspark code. Here we will use SparkSession to create a dataframe by reading from a input bucket.
 
 ```python
     import pyspark
@@ -66,32 +66,149 @@ Below are the steps to setup the enviroment and run the codes:
 
     bucket = "dataproc-testing-pyspark"
     spark.conf.set('temporaryGcsBucket', bucket)
-    df = spark.read.option( "inferSchema" , "true" ).option("header","true").\
-        csv("gs://dataproc-testing-pyspark/titanic.csv")
-    
-    df.createOrReplaceTempView('Titanic')
-
-    complete_data = spark.sql('Select * from Titanic')
-    complete_data.show()
+    df = spark.read.option( "inferSchema" , "true" ).option("header","true").csv("gs://dataproc-testing-pyspark/german_data.csv")
 
 ``` 
 
-5. **Saving the data in Bigquery**: At last we will save the data in the Bigquery table using the below command
+5. **Filtering out unwanted data using Filter()**: Here we will filter out data with Null values
 
 ```python
+    import findspark
     import pyspark
     from pyspark.sql import SparkSession
+    import pyspark.sql.functions as fn
+    from pyspark.sql import functions as sf
 
-    appName = "DataProc testing"
-    master = "local"
-    spark = SparkSession.builder.\
-            appName(appName).\
-            master(master).\
-            getOrCreate()     
-
+    #Initializing spark Session builder
+    spark = SparkSession.builder\
+            .master("local")\
+            .appName("Colab")\
+            .config('spark.ui.port', '4050')\
+            .getOrCreate()
     ...
-    complete_data.write.format('com.google.cloud.spark.bigquery').\
-        option('table', 'titanic.titanic_data').mode('append').save()
+    
+    df = df.filter((df.Purpose != 'NULL') 
+                   & (df.Existing_account != 'NULL') 
+                   & (df.Property !=  'NULL') 
+                   & (df.Personal_status != 'NULL') 
+                   & (df.Existing_account != 'NULL')  
+                   & (df.Credit_amount != 'NULL' ) 
+                   & (df.Installment_plans != 'NULL'))
+
+``` 
+
+6. **Changeing Datatype of certain columns**: Here we will change the datatype of a complete column data using withcolumn().
+
+```python
+    import findspark
+    import pyspark
+    from pyspark.sql import SparkSession
+    import pyspark.sql.functions as fn
+    from pyspark.sql import functions as sf
+
+    #Initializing spark Session builder
+    spark = SparkSession.builder\
+            .master("local")\
+            .appName("Colab")\
+            .config('spark.ui.port', '4050')\
+            .getOrCreate()
+    ...
+    df = df.withColumn("Credit_amount", df['Credit_amount'].cast('float'))
+
+``` 
+
+7. **Converting Encrpyted data to a more readable form**: Here we will decrypt data that us not human readable.
+
+```python
+    import findspark
+    import pyspark
+    from pyspark.sql import SparkSession
+    import pyspark.sql.functions as fn
+    from pyspark.sql import functions as sf
+
+    #Initializing spark Session builder
+    spark = SparkSession.builder\
+            .master("local")\
+            .appName("Colab")\
+            .config('spark.ui.port', '4050')\
+            .getOrCreate()
+    ...
+    split_col= pyspark.sql.functions.split(df['Existing_account'], '')
+    df = df.withColumn('Month', split_col.getItem(0))
+    df = df.withColumn('day1', split_col.getItem(1))
+    df = df.withColumn('day2', split_col.getItem(2))
+
+    df = df.withColumn('Days', sf.concat(sf.col('day1'),sf.col('day2')))
+
+    # Converting data into better readable format. Here Purpose column is segregated into 2 columns File Month and Version
+    split_purpose= pyspark.sql.functions.split(df['Purpose'], '')
+    df = df.withColumn('File_month', split_purpose.getItem(0))
+    df = df.withColumn('ver1', split_purpose.getItem(1))
+    df = df.withColumn('ver2', split_purpose.getItem(2))
+
+    df=df.withColumn('Version', sf.concat(sf.col('ver1'),sf.col('ver2')))
+
+    Month_Dict = {
+        'A':'January',
+        'B':'February',
+        'C':'March',
+        'D':'April',
+        'E':'May',
+        'F':'June',
+        'G':'July',
+        'H':'August',
+        'I':'September',
+        'J':'October',
+        'K':'November',
+        'L':'December'
+        }
+
+    df= df.replace(Month_Dict,subset=['File_month'])
+    df = df.replace(Month_Dict,subset=['Month'])
+
+``` 
+
+8. **Dropping redundant Columns**: Here we will remove columns which have been decrypted or are of no use.
+
+```python
+    import findspark
+    import pyspark
+    from pyspark.sql import SparkSession
+    import pyspark.sql.functions as fn
+    from pyspark.sql import functions as sf
+
+    #Initializing spark Session builder
+    spark = SparkSession.builder\
+            .master("local")\
+            .appName("Colab")\
+            .config('spark.ui.port', '4050')\
+            .getOrCreate()
+    ...
+    df = df.drop('day1')
+    df = df.drop('day2')
+    df = df.drop('ver1')
+    df = df.drop('ver2')
+    df = df.drop('Purpose')
+    df = df.drop('Existing_account')
+``` 
+10. **Saving the data in Bigquery**: At last we will save the data in the Bigquery table using the below command
+
+```python
+    python
+    import findspark
+    import pyspark
+    from pyspark.sql import SparkSession
+    import pyspark.sql.functions as fn
+    from pyspark.sql import functions as sf
+
+    #Initializing spark Session builder
+    spark = SparkSession.builder\
+            .master("local")\
+            .appName("Colab")\
+            .config('spark.ui.port', '4050')\
+            .getOrCreate()
+    ...
+    df.write.format('com.google.cloud.spark.bigquery').option('table', 'GermanCredit.German_Credit_final').mode('append').save()
 
 ``` 
 
@@ -117,21 +234,32 @@ To test the code we need to do the following:
         CLUSTER=testing-dataproc
         REGION=us-central1
         
-    5. Create a Biquery dataset with the name titanic and a table in this dataset by the name 
-       titanic_data with the schema
-        
-        PassengerId:INTEGER,
-        Survived:INTEGER,
-        Pclass:INTEGER,
-        Name:STRING,
-        Sex:STRING,
-        Age:FLOAT,
-        SibSp:INTEGER,
-        Parch:INTEGER,
-        Ticket:STRING,
-        Fare:FLOAT,
-        Cabin:STRING,
-        Embarked:STRING
+    5. Create a Biquery dataset with the name GermanCredit and a table named German_Credit_final. 
+       This should be an empty table with schema as given below:
+       
+        Duration_month:INTEGER,
+        Credit_history:STRING,
+        Credit_amount:FLOAT,
+        Saving:STRING,
+        Employment_duration:STRING,
+        Installment_rate:INTEGER,
+        Personal_status:STRING,
+        Debtors:STRING,
+        Residential_Duration:INTEGER,
+        Property:STRING,
+        Age:INTEGER,
+        Installment_plans:STRING,
+        Housing:STRING,
+        Number_of_credits:INTEGER,
+        Job:STRING,
+        Liable_People:INTEGER,
+        Telephone:STRING,
+        Foreign_worker:STRING,
+        Classification:INTEGER,
+        Month:STRING,
+        Days:STRING,
+        File_month:STRING,
+        Version:STRING
     
     6. Create a Dataproc cluster by using the command:
         gcloud dataproc clusters create ${CLUSTER} \
@@ -140,7 +268,7 @@ To test the code we need to do the following:
         --single-node 
     
     7. Create a PySpark Job to run the code:
-        gcloud dataproc jobs submit pyspark bq_write.py \
+        gcloud dataproc jobs submit pyspark Batch.py \
         --cluster=${CLUSTER} \
         --region=${REGION} \
         --jars=gs://spark-lib/bigquery/spark-bigquery-latest_2.12.jar
