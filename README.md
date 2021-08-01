@@ -107,7 +107,7 @@ To test the code we need to do the following:
     2. Create a US Multiregional Storage Bucket by the name dataproc-testing-pyspark.
     
     3. Copy the data file in the cloud Bucket using the below command
-        cd Read-file-from-GCS-using-Dataproc/data
+        cd Batch-Processing-using-Dataproc/data
         gsutil cp titanic.csv gs://dataproc-testing-pyspark/
         cd ..
 
