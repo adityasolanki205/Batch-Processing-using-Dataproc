@@ -225,7 +225,7 @@ To test the code we need to do the following:
     
     3. Copy the data file in the cloud Bucket using the below command
         cd Batch-Processing-using-Dataproc/data
-        gsutil cp titanic.csv gs://dataproc-testing-pyspark/
+        gsutil cp german_data.csv gs://dataproc-testing-pyspark/
         cd ..
 
     4. Create Temporary variables to hold GCP values
