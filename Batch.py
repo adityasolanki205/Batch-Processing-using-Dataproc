@@ -1,5 +1,8 @@
 import pyspark
+import findspark
 from pyspark.sql import SparkSession
+import pyspark.sql.functions as fn
+from pyspark.sql import functions as sf
 
 appName = "DataProc testing"
 master = "local"
