@@ -33,7 +33,7 @@ For the last two years, I have been part of a great learning curve wherein I hav
 
 Below are the steps to setup the enviroment and run the codes:
 
-1. **Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). Then we need to Download the data from [German Credit Risk](https://www.kaggle.com/uciml/german-credit). It will include 2 csv files, train.csv and test.csv. We will rename either of the files as titanic.csv. 
+1. **Setup**: First we will have to setup free google cloud account which can be done [here](https://cloud.google.com/free). Then we need to Download the data from [German Credit Risk](https://www.kaggle.com/uciml/german-credit). We have included it in the data folder in the repository
 
 2. **Cloning the Repository to Cloud SDK**: We will have to copy the repository on Cloud SDK using below command:
 
