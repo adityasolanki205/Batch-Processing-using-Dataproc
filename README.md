@@ -194,7 +194,6 @@ Below are the steps to setup the enviroment and run the codes:
 10. **Saving the data in Bigquery**: At last we will save the data in the Bigquery table using the below command
 
 ```python
-    python
     import findspark
     import pyspark
     from pyspark.sql import SparkSession
